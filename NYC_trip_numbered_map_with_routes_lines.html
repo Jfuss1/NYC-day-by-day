@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_77f37d6e7fbe6e00a4119cdfaaec60ff {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_77f37d6e7fbe6e00a4119cdfaaec60ff" ></div>
+        
+    
+<div style="position: fixed; 
+            bottom: 50px; left: 50px; width: 150px; height: 220px; 
+            background-color: white; z-index:9999; font-size:14px;
+            border:2px solid grey; border-radius:5px; padding: 10px;">
+    <b>Map Key</b><br>
+    <i style="background:blue; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 1 (Dec 28)<br>
+    <i style="background:green; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 2 (Dec 29)<br>
+    <i style="background:red; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 3 (Dec 30)<br>
+    <i style="background:purple; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 4 (Dec 31)<br>
+    <i style="background:orange; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 5 (Jan 1)<br>
+    <i style="background:pink; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> Day 6 (Jan 2)<br>
+</div>
+    
+<div style="position: fixed; 
+            bottom: 50px; left: 50px; width: 250px; height: 400px; 
+            background-color: white; z-index:9999; font-size:12px;
+            border:2px solid grey; border-radius:5px; padding: 10px; overflow-y: auto;">
+    <b>Map Key</b><br>
+    <i style="background:blue; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 1 (Dec 28)</b><br>
+    1. Arthur & Sons<br>
+    2. Jimmy’s Soho<br><br>
+    <i style="background:green; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 2 (Dec 29)</b><br>
+    3. Brooklyn Bridge<br>
+    4. Washington Street<br>
+    5. Pebble Beach<br>
+    6. Jane’s Carousel<br>
+    7. Timeout Market Rooftop<br>
+    8. Brooklyn Bridge Park<br>
+    9. Katz’s Deli<br>
+    10. Mama’s Too<br>
+    11. Raoul’s<br><br>
+    <i style="background:red; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 3 (Dec 30)</b><br>
+    12. Golden Diner<br>
+    13. 9/11 Museum<br>
+    14. The Seaport<br>
+    15. Jacob’s Pickles<br>
+    16. Aritzia<br>
+    17. Sephora<br>
+    18. Victoria’s Secret<br>
+    19. Au Cheval<br><br>
+    <i style="background:purple; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 4 (Dec 31)</b><br>
+    20. High Line<br>
+    21. Little Island<br>
+    22. 2nd STREET<br>
+    23. Target<br>
+    24. Lexington Candy Shop<br>
+    25. Parm<br><br>
+    <i style="background:orange; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 5 (Jan 1)</b><br>
+    26. Sadelle’s<br>
+    27. Bethesda Terrace<br>
+    28. The Plaza Hotel<br>
+    29. L’industrie Pizzeria<br>
+    30. Levain Bakery<br>
+    31. Jeju Noodle Bar<br><br>
+    <i style="background:pink; width:10px; height:10px; display:inline-block; margin-right:5px;"></i> <b>Day 6 (Jan 2)</b><br>
+    32. Leon’s Bagels<br>
+    33. Apollo Bagels<br>
+</div>
+</body>
+<script>
+    
+    
+            var map_77f37d6e7fbe6e00a4119cdfaaec60ff = L.map(
+                "map_77f37d6e7fbe6e00a4119cdfaaec60ff",
+                {
+                    center: [40.7128, -74.006],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_801aa263107ae05ce191dd769b4a85b4 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var marker_a105ad642eeb9dd7c667fab979a67fb9 = L.marker(
+                [40.733544, -74.002038],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_300870fe8a017d9588f70702e55c3016 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_a105ad642eeb9dd7c667fab979a67fb9.setIcon(icon_300870fe8a017d9588f70702e55c3016);
+        
+    
+        var popup_fa439fe7ff5528d4fd4fb0fa6f412446 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3137e6ce55c74fb78f2d901676e7d8ce = $(`<div id="html_3137e6ce55c74fb78f2d901676e7d8ce" style="width: 100.0%; height: 100.0%;">1. Arthur & Sons (Day 1 (Dec 28))</div>`)[0];
+            popup_fa439fe7ff5528d4fd4fb0fa6f412446.setContent(html_3137e6ce55c74fb78f2d901676e7d8ce);
+        
+
+        marker_a105ad642eeb9dd7c667fab979a67fb9.bindPopup(popup_fa439fe7ff5528d4fd4fb0fa6f412446)
+        ;
+
+        
+    
+    
+            var marker_21039038e0673f3a5ea7bd3b45626512 = L.marker(
+                [40.725219, -73.997913],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_12845f60b638b63569195693926afb2e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_21039038e0673f3a5ea7bd3b45626512.setIcon(icon_12845f60b638b63569195693926afb2e);
+        
+    
+        var popup_3a51fb1ff922371953d7df16341e6a63 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0445e5c835844a8ff7f3d9a0ac3b5bf4 = $(`<div id="html_0445e5c835844a8ff7f3d9a0ac3b5bf4" style="width: 100.0%; height: 100.0%;">2. Jimmy’s Soho (Day 1 (Dec 28))</div>`)[0];
+            popup_3a51fb1ff922371953d7df16341e6a63.setContent(html_0445e5c835844a8ff7f3d9a0ac3b5bf4);
+        
+
+        marker_21039038e0673f3a5ea7bd3b45626512.bindPopup(popup_3a51fb1ff922371953d7df16341e6a63)
+        ;
+
+        
+    
+    
+            var marker_93352e0431222d6df378bc72c2c28b7a = L.marker(
+                [40.706086, -73.996864],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_7494bca3199549f9e63a1b9b9e5cad87 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_93352e0431222d6df378bc72c2c28b7a.setIcon(icon_7494bca3199549f9e63a1b9b9e5cad87);
+        
+    
+        var popup_991b3c9ba3292126dc89a5eaf31f4a3d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c79a2b57617b1e0b4da20d8d40794733 = $(`<div id="html_c79a2b57617b1e0b4da20d8d40794733" style="width: 100.0%; height: 100.0%;">3. Brooklyn Bridge (Day 2 (Dec 29))</div>`)[0];
+            popup_991b3c9ba3292126dc89a5eaf31f4a3d.setContent(html_c79a2b57617b1e0b4da20d8d40794733);
+        
+
+        marker_93352e0431222d6df378bc72c2c28b7a.bindPopup(popup_991b3c9ba3292126dc89a5eaf31f4a3d)
+        ;
+
+        
+    
+    
+            var marker_9cb92d2095a4938d13beb722247c4b3e = L.marker(
+                [40.703277, -73.989463],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_29292388379aa70a5fd76bdae4ffc71a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9cb92d2095a4938d13beb722247c4b3e.setIcon(icon_29292388379aa70a5fd76bdae4ffc71a);
+        
+    
+        var popup_bf8e131a89195858bb4752788cff37a2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e37e7d30464707f44abef1ffcf4c0238 = $(`<div id="html_e37e7d30464707f44abef1ffcf4c0238" style="width: 100.0%; height: 100.0%;">4. Washington Street (Day 2 (Dec 29))</div>`)[0];
+            popup_bf8e131a89195858bb4752788cff37a2.setContent(html_e37e7d30464707f44abef1ffcf4c0238);
+        
+
+        marker_9cb92d2095a4938d13beb722247c4b3e.bindPopup(popup_bf8e131a89195858bb4752788cff37a2)
+        ;
+
+        
+    
+    
+            var marker_63489faeca7498070ff825041b3d6b9c = L.marker(
+                [40.703316, -73.994035],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_daf4446716839ad0c346926e092f934b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_63489faeca7498070ff825041b3d6b9c.setIcon(icon_daf4446716839ad0c346926e092f934b);
+        
+    
+        var popup_80f4211fc3cacd030938fe66c229df36 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d1278034e6af4fcca57177a668608f43 = $(`<div id="html_d1278034e6af4fcca57177a668608f43" style="width: 100.0%; height: 100.0%;">5. Pebble Beach (Day 2 (Dec 29))</div>`)[0];
+            popup_80f4211fc3cacd030938fe66c229df36.setContent(html_d1278034e6af4fcca57177a668608f43);
+        
+
+        marker_63489faeca7498070ff825041b3d6b9c.bindPopup(popup_80f4211fc3cacd030938fe66c229df36)
+        ;
+
+        
+    
+    
+            var marker_3abaf64621c5bdae1419c82e7f4674ed = L.marker(
+                [40.702222, -73.993513],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_f44cc1e90e460ad78b520812d763f69b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_3abaf64621c5bdae1419c82e7f4674ed.setIcon(icon_f44cc1e90e460ad78b520812d763f69b);
+        
+    
+        var popup_c2d73161d25b553b911d4b79bda02109 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e8a02b462e27815ec1c957bfdafba80a = $(`<div id="html_e8a02b462e27815ec1c957bfdafba80a" style="width: 100.0%; height: 100.0%;">6. Jane’s Carousel (Day 2 (Dec 29))</div>`)[0];
+            popup_c2d73161d25b553b911d4b79bda02109.setContent(html_e8a02b462e27815ec1c957bfdafba80a);
+        
+
+        marker_3abaf64621c5bdae1419c82e7f4674ed.bindPopup(popup_c2d73161d25b553b911d4b79bda02109)
+        ;
+
+        
+    
+    
+            var marker_4b9280e80b2c39b10fd5b7b66520a36b = L.marker(
+                [40.702213, -73.993425],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_ae0b493efc7fdfb20d0c40ef2aa3d52c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_4b9280e80b2c39b10fd5b7b66520a36b.setIcon(icon_ae0b493efc7fdfb20d0c40ef2aa3d52c);
+        
+    
+        var popup_28316b83940498fab377b0ce7999ad92 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_190a702fd853bddb083e6be8fc8628aa = $(`<div id="html_190a702fd853bddb083e6be8fc8628aa" style="width: 100.0%; height: 100.0%;">7. Timeout Market Rooftop (Day 2 (Dec 29))</div>`)[0];
+            popup_28316b83940498fab377b0ce7999ad92.setContent(html_190a702fd853bddb083e6be8fc8628aa);
+        
+
+        marker_4b9280e80b2c39b10fd5b7b66520a36b.bindPopup(popup_28316b83940498fab377b0ce7999ad92)
+        ;
+
+        
+    
+    
+            var marker_2a4cd49f6f0c33ba3834ce42689a5fa6 = L.marker(
+                [40.703277, -73.997536],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_6379c9067b5bf594c2da6cfa8505f95d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2a4cd49f6f0c33ba3834ce42689a5fa6.setIcon(icon_6379c9067b5bf594c2da6cfa8505f95d);
+        
+    
+        var popup_a6bf3455ce4447f5ad97880aedb69da6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_52df4e59a0a5d81f7b2c2ec5ffa7790e = $(`<div id="html_52df4e59a0a5d81f7b2c2ec5ffa7790e" style="width: 100.0%; height: 100.0%;">8. Brooklyn Bridge Park (Day 2 (Dec 29))</div>`)[0];
+            popup_a6bf3455ce4447f5ad97880aedb69da6.setContent(html_52df4e59a0a5d81f7b2c2ec5ffa7790e);
+        
+
+        marker_2a4cd49f6f0c33ba3834ce42689a5fa6.bindPopup(popup_a6bf3455ce4447f5ad97880aedb69da6)
+        ;
+
+        
+    
+    
+            var marker_82262475bda4779b4a4b9cebf716efd7 = L.marker(
+                [40.722233, -73.987342],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_478eee3d0741b3f837b55bd5ecc65895 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_82262475bda4779b4a4b9cebf716efd7.setIcon(icon_478eee3d0741b3f837b55bd5ecc65895);
+        
+    
+        var popup_82dcd2f4afad4374465d4682d5188c8b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_730866667d9e00986e68714e06f00859 = $(`<div id="html_730866667d9e00986e68714e06f00859" style="width: 100.0%; height: 100.0%;">9. Katz’s Deli (Day 2 (Dec 29))</div>`)[0];
+            popup_82dcd2f4afad4374465d4682d5188c8b.setContent(html_730866667d9e00986e68714e06f00859);
+        
+
+        marker_82262475bda4779b4a4b9cebf716efd7.bindPopup(popup_82dcd2f4afad4374465d4682d5188c8b)
+        ;
+
+        
+    
+    
+            var marker_6cc098bb3efcbd079eff2bcec7344550 = L.marker(
+                [40.796881, -73.970714],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_9e35bcb2c491b11f75f85ef6240f545c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6cc098bb3efcbd079eff2bcec7344550.setIcon(icon_9e35bcb2c491b11f75f85ef6240f545c);
+        
+    
+        var popup_9c930f98a51e1ca2ce3dd270c6bb655e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a1870bca169215cb8fe8f86e641a5193 = $(`<div id="html_a1870bca169215cb8fe8f86e641a5193" style="width: 100.0%; height: 100.0%;">10. Mama’s Too (Day 2 (Dec 29))</div>`)[0];
+            popup_9c930f98a51e1ca2ce3dd270c6bb655e.setContent(html_a1870bca169215cb8fe8f86e641a5193);
+        
+
+        marker_6cc098bb3efcbd079eff2bcec7344550.bindPopup(popup_9c930f98a51e1ca2ce3dd270c6bb655e)
+        ;
+
+        
+    
+    
+            var marker_7e1d66476616a23ad71048a0d1ec6377 = L.marker(
+                [40.725255, -74.004464],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_09d2625ae1974a613e861b4d322a403b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7e1d66476616a23ad71048a0d1ec6377.setIcon(icon_09d2625ae1974a613e861b4d322a403b);
+        
+    
+        var popup_410eeb9490d5fdc8fea47ab779c196bb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0d6e208fa2726f3f7d4c231640ec1d79 = $(`<div id="html_0d6e208fa2726f3f7d4c231640ec1d79" style="width: 100.0%; height: 100.0%;">11. Raoul’s (Day 2 (Dec 29))</div>`)[0];
+            popup_410eeb9490d5fdc8fea47ab779c196bb.setContent(html_0d6e208fa2726f3f7d4c231640ec1d79);
+        
+
+        marker_7e1d66476616a23ad71048a0d1ec6377.bindPopup(popup_410eeb9490d5fdc8fea47ab779c196bb)
+        ;
+
+        
+    
+    
+            var marker_64807b6b99c8ad2006b6a4608390a0cb = L.marker(
+                [40.711661, -73.987725],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_d8b9f9bfb2cf2302c0d163177da4da3b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_64807b6b99c8ad2006b6a4608390a0cb.setIcon(icon_d8b9f9bfb2cf2302c0d163177da4da3b);
+        
+    
+        var popup_b363606bdebf89b3be3704dc46745283 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5368c1109052c4023d8209e1e1f06fcb = $(`<div id="html_5368c1109052c4023d8209e1e1f06fcb" style="width: 100.0%; height: 100.0%;">12. Golden Diner (Day 3 (Dec 30))</div>`)[0];
+            popup_b363606bdebf89b3be3704dc46745283.setContent(html_5368c1109052c4023d8209e1e1f06fcb);
+        
+
+        marker_64807b6b99c8ad2006b6a4608390a0cb.bindPopup(popup_b363606bdebf89b3be3704dc46745283)
+        ;
+
+        
+    
+    
+            var marker_6a2c5fe796a15ff4aae6e92efd73c3f9 = L.marker(
+                [40.711476, -74.013379],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_04c403b6c298f77690d4c58e65d52ad3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_6a2c5fe796a15ff4aae6e92efd73c3f9.setIcon(icon_04c403b6c298f77690d4c58e65d52ad3);
+        
+    
+        var popup_892ea61cc1f041801f181fa34b639ddf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8959284b6ae59be927707ebb7b021517 = $(`<div id="html_8959284b6ae59be927707ebb7b021517" style="width: 100.0%; height: 100.0%;">13. 9/11 Museum (Day 3 (Dec 30))</div>`)[0];
+            popup_892ea61cc1f041801f181fa34b639ddf.setContent(html_8959284b6ae59be927707ebb7b021517);
+        
+
+        marker_6a2c5fe796a15ff4aae6e92efd73c3f9.bindPopup(popup_892ea61cc1f041801f181fa34b639ddf)
+        ;
+
+        
+    
+    
+            var marker_ce5a2422c6be1ba5b5eb7141fd4ef3aa = L.marker(
+                [40.707227, -74.003739],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_6efab13a7e5411d080da50581decc73d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_ce5a2422c6be1ba5b5eb7141fd4ef3aa.setIcon(icon_6efab13a7e5411d080da50581decc73d);
+        
+    
+        var popup_27dc704a7f2042a46784a7d7779bdc44 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_042ef245806b8ea60a1234799811b642 = $(`<div id="html_042ef245806b8ea60a1234799811b642" style="width: 100.0%; height: 100.0%;">14. The Seaport (Day 3 (Dec 30))</div>`)[0];
+            popup_27dc704a7f2042a46784a7d7779bdc44.setContent(html_042ef245806b8ea60a1234799811b642);
+        
+
+        marker_ce5a2422c6be1ba5b5eb7141fd4ef3aa.bindPopup(popup_27dc704a7f2042a46784a7d7779bdc44)
+        ;
+
+        
+    
+    
+            var marker_ac0eae8a9d3fc5cd9bdac784aab50772 = L.marker(
+                [40.785062, -73.976819],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_98aad5c1852c7e874f908318612b6767 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_ac0eae8a9d3fc5cd9bdac784aab50772.setIcon(icon_98aad5c1852c7e874f908318612b6767);
+        
+    
+        var popup_fb8f756fa8730f2f767b79e8f30a2152 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e17ab875b773212af280f0d7513fe43e = $(`<div id="html_e17ab875b773212af280f0d7513fe43e" style="width: 100.0%; height: 100.0%;">15. Jacob’s Pickles (Day 3 (Dec 30))</div>`)[0];
+            popup_fb8f756fa8730f2f767b79e8f30a2152.setContent(html_e17ab875b773212af280f0d7513fe43e);
+        
+
+        marker_ac0eae8a9d3fc5cd9bdac784aab50772.bindPopup(popup_fb8f756fa8730f2f767b79e8f30a2152)
+        ;
+
+        
+    
+    
+            var marker_048fce1578c9aeddfb82a57b4bae067d = L.marker(
+                [40.726227, -74.000893],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_40678155f85739a263c789324ca5219e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_048fce1578c9aeddfb82a57b4bae067d.setIcon(icon_40678155f85739a263c789324ca5219e);
+        
+    
+        var popup_498b6c7ce5b8b90f4d5cb1ad12f8ad0d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f22f2e3a26af516cd8c4a7fc4e46ac96 = $(`<div id="html_f22f2e3a26af516cd8c4a7fc4e46ac96" style="width: 100.0%; height: 100.0%;">16. Aritzia (Day 3 (Dec 30))</div>`)[0];
+            popup_498b6c7ce5b8b90f4d5cb1ad12f8ad0d.setContent(html_f22f2e3a26af516cd8c4a7fc4e46ac96);
+        
+
+        marker_048fce1578c9aeddfb82a57b4bae067d.bindPopup(popup_498b6c7ce5b8b90f4d5cb1ad12f8ad0d)
+        ;
+
+        
+    
+    
+            var marker_9ff9feac80cf9929d20fe616dafc5520 = L.marker(
+                [40.741358, -73.992072],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_b34c14d0ed51a0ecccc0a2a8831ef3e9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_9ff9feac80cf9929d20fe616dafc5520.setIcon(icon_b34c14d0ed51a0ecccc0a2a8831ef3e9);
+        
+    
+        var popup_b5cdc527f374dd3cf0e9332898a4a1d2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d0c028e459b2a7ed03afd3edf7560c24 = $(`<div id="html_d0c028e459b2a7ed03afd3edf7560c24" style="width: 100.0%; height: 100.0%;">17. Sephora (Day 3 (Dec 30))</div>`)[0];
+            popup_b5cdc527f374dd3cf0e9332898a4a1d2.setContent(html_d0c028e459b2a7ed03afd3edf7560c24);
+        
+
+        marker_9ff9feac80cf9929d20fe616dafc5520.bindPopup(popup_b5cdc527f374dd3cf0e9332898a4a1d2)
+        ;
+
+        
+    
+    
+            var marker_e3a6ffc017b841601915768a45aacdfb = L.marker(
+                [40.754625, -73.986362],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_e29c285503f4f1e74762b616818d1368 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_e3a6ffc017b841601915768a45aacdfb.setIcon(icon_e29c285503f4f1e74762b616818d1368);
+        
+    
+        var popup_4213a0df413c15e9ef46cbb26ba4ac71 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f3d3773e571ab27e5f2bc2ad53d8dc6b = $(`<div id="html_f3d3773e571ab27e5f2bc2ad53d8dc6b" style="width: 100.0%; height: 100.0%;">18. Victoria’s Secret (Day 3 (Dec 30))</div>`)[0];
+            popup_4213a0df413c15e9ef46cbb26ba4ac71.setContent(html_f3d3773e571ab27e5f2bc2ad53d8dc6b);
+        
+
+        marker_e3a6ffc017b841601915768a45aacdfb.bindPopup(popup_4213a0df413c15e9ef46cbb26ba4ac71)
+        ;
+
+        
+    
+    
+            var marker_f42d3af8a706f75a0d8aa2925f58ecc5 = L.marker(
+                [40.725719, -74.005298],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_8549659321a55248282d8899d9160535 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_f42d3af8a706f75a0d8aa2925f58ecc5.setIcon(icon_8549659321a55248282d8899d9160535);
+        
+    
+        var popup_386f183bbb19fb1ee4afe2a1a33afed4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9dc8d322a1021907a5328fc27ce584ae = $(`<div id="html_9dc8d322a1021907a5328fc27ce584ae" style="width: 100.0%; height: 100.0%;">19. Au Cheval (Day 3 (Dec 30))</div>`)[0];
+            popup_386f183bbb19fb1ee4afe2a1a33afed4.setContent(html_9dc8d322a1021907a5328fc27ce584ae);
+        
+
+        marker_f42d3af8a706f75a0d8aa2925f58ecc5.bindPopup(popup_386f183bbb19fb1ee4afe2a1a33afed4)
+        ;
+
+        
+    
+    
+            var marker_f66ceab791bedd946d13f5dccc2131be = L.marker(
+                [40.748008, -74.004647],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_fa97eb3aaa1f5cd9de74cf35b167dc29 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_f66ceab791bedd946d13f5dccc2131be.setIcon(icon_fa97eb3aaa1f5cd9de74cf35b167dc29);
+        
+    
+        var popup_2d1d361f20898f32b7229b56c027ca99 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ac6d7481e03d34a85d2c010c21759981 = $(`<div id="html_ac6d7481e03d34a85d2c010c21759981" style="width: 100.0%; height: 100.0%;">20. High Line (Day 4 (Dec 31))</div>`)[0];
+            popup_2d1d361f20898f32b7229b56c027ca99.setContent(html_ac6d7481e03d34a85d2c010c21759981);
+        
+
+        marker_f66ceab791bedd946d13f5dccc2131be.bindPopup(popup_2d1d361f20898f32b7229b56c027ca99)
+        ;
+
+        
+    
+    
+            var marker_4ccf3948c2767bc828f049975cfa78f1 = L.marker(
+                [40.742799, -74.008956],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_02ce649ce7e1671939b88e0b374d0e7a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_4ccf3948c2767bc828f049975cfa78f1.setIcon(icon_02ce649ce7e1671939b88e0b374d0e7a);
+        
+    
+        var popup_0e025a1064d86bf12f8211a4c404bc6c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cf01bcd359b62ad828af2e75485f6dd7 = $(`<div id="html_cf01bcd359b62ad828af2e75485f6dd7" style="width: 100.0%; height: 100.0%;">21. Little Island (Day 4 (Dec 31))</div>`)[0];
+            popup_0e025a1064d86bf12f8211a4c404bc6c.setContent(html_cf01bcd359b62ad828af2e75485f6dd7);
+        
+
+        marker_4ccf3948c2767bc828f049975cfa78f1.bindPopup(popup_0e025a1064d86bf12f8211a4c404bc6c)
+        ;
+
+        
+    
+    
+            var marker_391a8953330bcf05ba8666c81c93cb45 = L.marker(
+                [40.724932, -73.999768],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_81db73d7805e6fdbc9fad42d23171cc3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_391a8953330bcf05ba8666c81c93cb45.setIcon(icon_81db73d7805e6fdbc9fad42d23171cc3);
+        
+    
+        var popup_2dda14e566b0b7b0650186bca17a583b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_949b35aaa9a5f9f090255d7ca9d3554b = $(`<div id="html_949b35aaa9a5f9f090255d7ca9d3554b" style="width: 100.0%; height: 100.0%;">22. 2nd STREET (Day 4 (Dec 31))</div>`)[0];
+            popup_2dda14e566b0b7b0650186bca17a583b.setContent(html_949b35aaa9a5f9f090255d7ca9d3554b);
+        
+
+        marker_391a8953330bcf05ba8666c81c93cb45.bindPopup(popup_2dda14e566b0b7b0650186bca17a583b)
+        ;
+
+        
+    
+    
+            var marker_49d810cde9d46f21e824d60c961075b8 = L.marker(
+                [40.758911, -73.994232],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_055cc77e10cbb1d783ced53bb11f5bdc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_49d810cde9d46f21e824d60c961075b8.setIcon(icon_055cc77e10cbb1d783ced53bb11f5bdc);
+        
+    
+        var popup_68f79ef3747942ce0b45e714c534f3f1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ca52dfb7e62ac3cc75dc4a6583d42f34 = $(`<div id="html_ca52dfb7e62ac3cc75dc4a6583d42f34" style="width: 100.0%; height: 100.0%;">23. Target (Day 4 (Dec 31))</div>`)[0];
+            popup_68f79ef3747942ce0b45e714c534f3f1.setContent(html_ca52dfb7e62ac3cc75dc4a6583d42f34);
+        
+
+        marker_49d810cde9d46f21e824d60c961075b8.bindPopup(popup_68f79ef3747942ce0b45e714c534f3f1)
+        ;
+
+        
+    
+    
+            var marker_0b6f5bebfef621645d7ebe2b3a20610b = L.marker(
+                [40.773101, -73.958479],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_26a17b9875a862e83fef373c60702cf8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_0b6f5bebfef621645d7ebe2b3a20610b.setIcon(icon_26a17b9875a862e83fef373c60702cf8);
+        
+    
+        var popup_0e5b4726fd772f2a2ee862d201c96e31 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_65e3f4fdcf882a6243ac67160edb3d27 = $(`<div id="html_65e3f4fdcf882a6243ac67160edb3d27" style="width: 100.0%; height: 100.0%;">24. Lexington Candy Shop (Day 4 (Dec 31))</div>`)[0];
+            popup_0e5b4726fd772f2a2ee862d201c96e31.setContent(html_65e3f4fdcf882a6243ac67160edb3d27);
+        
+
+        marker_0b6f5bebfef621645d7ebe2b3a20610b.bindPopup(popup_0e5b4726fd772f2a2ee862d201c96e31)
+        ;
+
+        
+    
+    
+            var marker_641cc218aa3b57384870cf1f92ee2f9f = L.marker(
+                [40.721724, -73.997401],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_528b6c0d845081f3b5ca3add220974b0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_641cc218aa3b57384870cf1f92ee2f9f.setIcon(icon_528b6c0d845081f3b5ca3add220974b0);
+        
+    
+        var popup_fc9c2263a890062440eab1c90906a724 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_151b3723c966e4438cefc7fee2e96e8a = $(`<div id="html_151b3723c966e4438cefc7fee2e96e8a" style="width: 100.0%; height: 100.0%;">25. Parm (Day 4 (Dec 31))</div>`)[0];
+            popup_fc9c2263a890062440eab1c90906a724.setContent(html_151b3723c966e4438cefc7fee2e96e8a);
+        
+
+        marker_641cc218aa3b57384870cf1f92ee2f9f.bindPopup(popup_fc9c2263a890062440eab1c90906a724)
+        ;
+
+        
+    
+    
+            var marker_496bf2da612d5407ef85561573b79075 = L.marker(
+                [40.725314, -74.004198],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_3c48cada77b86c70512a75bd3eee9c06 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_496bf2da612d5407ef85561573b79075.setIcon(icon_3c48cada77b86c70512a75bd3eee9c06);
+        
+    
+        var popup_3897e345ffd448688a3577b4a2f2a22c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b630e02cba577d3df5619361671fd646 = $(`<div id="html_b630e02cba577d3df5619361671fd646" style="width: 100.0%; height: 100.0%;">26. Sadelle’s (Day 5 (Jan 1))</div>`)[0];
+            popup_3897e345ffd448688a3577b4a2f2a22c.setContent(html_b630e02cba577d3df5619361671fd646);
+        
+
+        marker_496bf2da612d5407ef85561573b79075.bindPopup(popup_3897e345ffd448688a3577b4a2f2a22c)
+        ;
+
+        
+    
+    
+            var marker_55e781f30a8e22018eeab3dcf81e7a70 = L.marker(
+                [40.774178, -73.970093],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_016990dc1533c0f808a189fca3eb00b4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_55e781f30a8e22018eeab3dcf81e7a70.setIcon(icon_016990dc1533c0f808a189fca3eb00b4);
+        
+    
+        var popup_0f229b463f1e7d81a97e38f6b7277e94 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_260e63d57e2fae2de9bab0b916b2010d = $(`<div id="html_260e63d57e2fae2de9bab0b916b2010d" style="width: 100.0%; height: 100.0%;">27. Bethesda Terrace (Day 5 (Jan 1))</div>`)[0];
+            popup_0f229b463f1e7d81a97e38f6b7277e94.setContent(html_260e63d57e2fae2de9bab0b916b2010d);
+        
+
+        marker_55e781f30a8e22018eeab3dcf81e7a70.bindPopup(popup_0f229b463f1e7d81a97e38f6b7277e94)
+        ;
+
+        
+    
+    
+            var marker_103da25da2b1232ead0b4b7784c5f12b = L.marker(
+                [40.764511, -73.974185],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_68e47044c43bf86178e3f48544f4ea19 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_103da25da2b1232ead0b4b7784c5f12b.setIcon(icon_68e47044c43bf86178e3f48544f4ea19);
+        
+    
+        var popup_a0975dae6b9b992552fde3975b35a881 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6d23fb62f67a9bba31149ebe002d7fb0 = $(`<div id="html_6d23fb62f67a9bba31149ebe002d7fb0" style="width: 100.0%; height: 100.0%;">28. The Plaza Hotel (Day 5 (Jan 1))</div>`)[0];
+            popup_a0975dae6b9b992552fde3975b35a881.setContent(html_6d23fb62f67a9bba31149ebe002d7fb0);
+        
+
+        marker_103da25da2b1232ead0b4b7784c5f12b.bindPopup(popup_a0975dae6b9b992552fde3975b35a881)
+        ;
+
+        
+    
+    
+            var marker_4cd9b6ae07879be881f7a000adb0d2ff = L.marker(
+                [40.707169, -73.963663],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_758acf750063c93277fa3e8fd222c78d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_4cd9b6ae07879be881f7a000adb0d2ff.setIcon(icon_758acf750063c93277fa3e8fd222c78d);
+        
+    
+        var popup_2072044b4d2732e8b74f176ce21a88dc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4be5a1176d19f53b2101d4e4e4062b38 = $(`<div id="html_4be5a1176d19f53b2101d4e4e4062b38" style="width: 100.0%; height: 100.0%;">29. L’industrie Pizzeria (Day 5 (Jan 1))</div>`)[0];
+            popup_2072044b4d2732e8b74f176ce21a88dc.setContent(html_4be5a1176d19f53b2101d4e4e4062b38);
+        
+
+        marker_4cd9b6ae07879be881f7a000adb0d2ff.bindPopup(popup_2072044b4d2732e8b74f176ce21a88dc)
+        ;
+
+        
+    
+    
+            var marker_fa6ac3f92aef54ce177323efd7bb9a9c = L.marker(
+                [40.779668, -73.980019],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_e0525f4c964e1b8739b5b39e7eae60c5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_fa6ac3f92aef54ce177323efd7bb9a9c.setIcon(icon_e0525f4c964e1b8739b5b39e7eae60c5);
+        
+    
+        var popup_ec7c8dfe732f599dc1800ca681fd8537 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f9c8b49ad40c0558ab8c0c4768d86de9 = $(`<div id="html_f9c8b49ad40c0558ab8c0c4768d86de9" style="width: 100.0%; height: 100.0%;">30. Levain Bakery (Day 5 (Jan 1))</div>`)[0];
+            popup_ec7c8dfe732f599dc1800ca681fd8537.setContent(html_f9c8b49ad40c0558ab8c0c4768d86de9);
+        
+
+        marker_fa6ac3f92aef54ce177323efd7bb9a9c.bindPopup(popup_ec7c8dfe732f599dc1800ca681fd8537)
+        ;
+
+        
+    
+    
+            var marker_4b3f298cd3294c37206c8053b3671df5 = L.marker(
+                [40.734346, -74.008759],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_5d214c643bb71fef0a97dfe43e36fcdb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_4b3f298cd3294c37206c8053b3671df5.setIcon(icon_5d214c643bb71fef0a97dfe43e36fcdb);
+        
+    
+        var popup_7bf0462d22df016b62c1507c62e6502a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_95bb679073cae3ab772ee25a0f4227ac = $(`<div id="html_95bb679073cae3ab772ee25a0f4227ac" style="width: 100.0%; height: 100.0%;">31. Jeju Noodle Bar (Day 5 (Jan 1))</div>`)[0];
+            popup_7bf0462d22df016b62c1507c62e6502a.setContent(html_95bb679073cae3ab772ee25a0f4227ac);
+        
+
+        marker_4b3f298cd3294c37206c8053b3671df5.bindPopup(popup_7bf0462d22df016b62c1507c62e6502a)
+        ;
+
+        
+    
+    
+            var marker_a87fd3f4f7461fd8405f4bbb54da894f = L.marker(
+                [40.729107, -73.989045],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_a85acb094cbb1014a91a5a22b1c9f62d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "pink", "prefix": "glyphicon"}
+            );
+            marker_a87fd3f4f7461fd8405f4bbb54da894f.setIcon(icon_a85acb094cbb1014a91a5a22b1c9f62d);
+        
+    
+        var popup_e8d9f38243f9951c2b4336df51f3b9fc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_22d2028dfa3e39fde77b93c2ae497d6d = $(`<div id="html_22d2028dfa3e39fde77b93c2ae497d6d" style="width: 100.0%; height: 100.0%;">32. Leon’s Bagels (Day 6 (Jan 2))</div>`)[0];
+            popup_e8d9f38243f9951c2b4336df51f3b9fc.setContent(html_22d2028dfa3e39fde77b93c2ae497d6d);
+        
+
+        marker_a87fd3f4f7461fd8405f4bbb54da894f.bindPopup(popup_e8d9f38243f9951c2b4336df51f3b9fc)
+        ;
+
+        
+    
+    
+            var marker_eb4d68d600664126384e4734f661313e = L.marker(
+                [40.732893, -73.98264],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_ee846e649f75344c11875e2c7e54bc7e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "pink", "prefix": "glyphicon"}
+            );
+            marker_eb4d68d600664126384e4734f661313e.setIcon(icon_ee846e649f75344c11875e2c7e54bc7e);
+        
+    
+        var popup_e1e2918fa7376c7b472150ad0870f93a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d6de1014c1cb052cdcb96dcd9faa0f39 = $(`<div id="html_d6de1014c1cb052cdcb96dcd9faa0f39" style="width: 100.0%; height: 100.0%;">33. Apollo Bagels (Day 6 (Jan 2))</div>`)[0];
+            popup_e1e2918fa7376c7b472150ad0870f93a.setContent(html_d6de1014c1cb052cdcb96dcd9faa0f39);
+        
+
+        marker_eb4d68d600664126384e4734f661313e.bindPopup(popup_e1e2918fa7376c7b472150ad0870f93a)
+        ;
+
+        
+    
+    
+            var marker_290a22f95721c452a42feaa53c25271e = L.marker(
+                [40.7098, -74.0105],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_5a5369b15f2845d3fdf6fcfcf4ec9402 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "white", "prefix": "glyphicon"}
+            );
+            marker_290a22f95721c452a42feaa53c25271e.setIcon(icon_5a5369b15f2845d3fdf6fcfcf4ec9402);
+        
+    
+        var popup_ae4c45ddbbae05a308ce2448fd23280c = L.popup({"maxWidth": 300});
+
+        
+
+        marker_290a22f95721c452a42feaa53c25271e.bindPopup(popup_ae4c45ddbbae05a308ce2448fd23280c)
+        ;
+
+        
+    
+    
+            var marker_c7ed1f9db7883ba8efab4c1aae03d210 = L.marker(
+                [40.7098, -74.0105],
+                {}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+            var icon_390ef00fc082c15886e4d1ca7f237c17 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "white", "prefix": "glyphicon"}
+            );
+            marker_c7ed1f9db7883ba8efab4c1aae03d210.setIcon(icon_390ef00fc082c15886e4d1ca7f237c17);
+        
+    
+        var popup_9cac73af461c389823c476869a411e21 = L.popup({"maxWidth": 300});
+
+        
+
+        marker_c7ed1f9db7883ba8efab4c1aae03d210.bindPopup(popup_9cac73af461c389823c476869a411e21)
+        ;
+
+        
+    
+    
+            var poly_line_784dd95a51a1b363b9e26ec696b14aa0 = L.polyline(
+                [[40.733544, -74.002038], [40.725219, -73.997913]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_3168a08887dece77bf565a9ff85a5318 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4550873b378d2f597ef4cba98ddac0a3 = $(`<div id="html_4550873b378d2f597ef4cba98ddac0a3" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.733544,-74.002038/40.725219,-73.997913" target="_blank">Route: Arthur & Sons → Jimmy’s Soho</a></div>`)[0];
+            popup_3168a08887dece77bf565a9ff85a5318.setContent(html_4550873b378d2f597ef4cba98ddac0a3);
+        
+
+        poly_line_784dd95a51a1b363b9e26ec696b14aa0.bindPopup(popup_3168a08887dece77bf565a9ff85a5318)
+        ;
+
+        
+    
+    
+            var poly_line_62ab7b152d2d0ac7d88337d9f900137c = L.polyline(
+                [[40.706086, -73.996864], [40.703277, -73.989463]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_c61bf6b9d054f39e126bf2001b0f6163 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_aa738086a6cc4612bfe79651b36acf65 = $(`<div id="html_aa738086a6cc4612bfe79651b36acf65" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.706086,-73.996864/40.703277,-73.989463" target="_blank">Route: Brooklyn Bridge → Washington Street</a></div>`)[0];
+            popup_c61bf6b9d054f39e126bf2001b0f6163.setContent(html_aa738086a6cc4612bfe79651b36acf65);
+        
+
+        poly_line_62ab7b152d2d0ac7d88337d9f900137c.bindPopup(popup_c61bf6b9d054f39e126bf2001b0f6163)
+        ;
+
+        
+    
+    
+            var poly_line_c85808455092c84a5b2c19cf7b6bb4da = L.polyline(
+                [[40.703277, -73.989463], [40.703316, -73.994035]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_a45db5028c943337cb4fb2ad9377947e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4b07c9944081cbb2781767fff16e27d4 = $(`<div id="html_4b07c9944081cbb2781767fff16e27d4" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.703277,-73.989463/40.703316,-73.994035" target="_blank">Route: Washington Street → Pebble Beach</a></div>`)[0];
+            popup_a45db5028c943337cb4fb2ad9377947e.setContent(html_4b07c9944081cbb2781767fff16e27d4);
+        
+
+        poly_line_c85808455092c84a5b2c19cf7b6bb4da.bindPopup(popup_a45db5028c943337cb4fb2ad9377947e)
+        ;
+
+        
+    
+    
+            var poly_line_8c28f9cbb37d8d666eb412200ba35bca = L.polyline(
+                [[40.703316, -73.994035], [40.702222, -73.993513]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_6a5e286172ec1e032dcb376287baecdd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ece8f566f211978ebb7ee6bc46b0a6b6 = $(`<div id="html_ece8f566f211978ebb7ee6bc46b0a6b6" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.703316,-73.994035/40.702222,-73.993513" target="_blank">Route: Pebble Beach → Jane’s Carousel</a></div>`)[0];
+            popup_6a5e286172ec1e032dcb376287baecdd.setContent(html_ece8f566f211978ebb7ee6bc46b0a6b6);
+        
+
+        poly_line_8c28f9cbb37d8d666eb412200ba35bca.bindPopup(popup_6a5e286172ec1e032dcb376287baecdd)
+        ;
+
+        
+    
+    
+            var poly_line_0c88a07b89473e58ec66d25d047b0abe = L.polyline(
+                [[40.702222, -73.993513], [40.702213, -73.993425]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_980290c1799e3db57fb4ef25f2fa4df1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e99687f8d71ddb8c34c828f724ecb5dc = $(`<div id="html_e99687f8d71ddb8c34c828f724ecb5dc" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.702222,-73.993513/40.702213,-73.993425" target="_blank">Route: Jane’s Carousel → Timeout Market Rooftop</a></div>`)[0];
+            popup_980290c1799e3db57fb4ef25f2fa4df1.setContent(html_e99687f8d71ddb8c34c828f724ecb5dc);
+        
+
+        poly_line_0c88a07b89473e58ec66d25d047b0abe.bindPopup(popup_980290c1799e3db57fb4ef25f2fa4df1)
+        ;
+
+        
+    
+    
+            var poly_line_8f41f16c91d357e15c16bf49c144ff83 = L.polyline(
+                [[40.702213, -73.993425], [40.703277, -73.997536]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_c3736593fbdad5f84bbf9ae634542b0e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dfbaeec07db25f01f97af3e3bc7d38bf = $(`<div id="html_dfbaeec07db25f01f97af3e3bc7d38bf" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.702213,-73.993425/40.703277,-73.997536" target="_blank">Route: Timeout Market Rooftop → Brooklyn Bridge Park</a></div>`)[0];
+            popup_c3736593fbdad5f84bbf9ae634542b0e.setContent(html_dfbaeec07db25f01f97af3e3bc7d38bf);
+        
+
+        poly_line_8f41f16c91d357e15c16bf49c144ff83.bindPopup(popup_c3736593fbdad5f84bbf9ae634542b0e)
+        ;
+
+        
+    
+    
+            var poly_line_38dcb9a7b1f82db2553a5dc07029b70d = L.polyline(
+                [[40.703277, -73.997536], [40.722233, -73.987342]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_d424a8f176e8c7c893d5beb4502817ca = L.popup({"maxWidth": "100%"});
+
+        
+            var html_eae12530760b54d8fcb53bc5a0c96f62 = $(`<div id="html_eae12530760b54d8fcb53bc5a0c96f62" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.703277,-73.997536/40.722233,-73.987342" target="_blank">Route: Brooklyn Bridge Park → Katz’s Deli</a></div>`)[0];
+            popup_d424a8f176e8c7c893d5beb4502817ca.setContent(html_eae12530760b54d8fcb53bc5a0c96f62);
+        
+
+        poly_line_38dcb9a7b1f82db2553a5dc07029b70d.bindPopup(popup_d424a8f176e8c7c893d5beb4502817ca)
+        ;
+
+        
+    
+    
+            var poly_line_17d9ac2ebf5d96114d701295027145e7 = L.polyline(
+                [[40.722233, -73.987342], [40.796881, -73.970714]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_3a2b2670751954ea225f5e241b517474 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_48c3eddfd91011f64a44a35996a21352 = $(`<div id="html_48c3eddfd91011f64a44a35996a21352" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.722233,-73.987342/40.796881,-73.970714" target="_blank">Route: Katz’s Deli → Mama’s Too</a></div>`)[0];
+            popup_3a2b2670751954ea225f5e241b517474.setContent(html_48c3eddfd91011f64a44a35996a21352);
+        
+
+        poly_line_17d9ac2ebf5d96114d701295027145e7.bindPopup(popup_3a2b2670751954ea225f5e241b517474)
+        ;
+
+        
+    
+    
+            var poly_line_ee48838e80f459ad0c974fc69f1d2535 = L.polyline(
+                [[40.796881, -73.970714], [40.725255, -74.004464]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_a4c5e40f7302481105176b594cda99a8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_80e387885c5183cd952a425fc4763d2d = $(`<div id="html_80e387885c5183cd952a425fc4763d2d" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.796881,-73.970714/40.725255,-74.004464" target="_blank">Route: Mama’s Too → Raoul’s</a></div>`)[0];
+            popup_a4c5e40f7302481105176b594cda99a8.setContent(html_80e387885c5183cd952a425fc4763d2d);
+        
+
+        poly_line_ee48838e80f459ad0c974fc69f1d2535.bindPopup(popup_a4c5e40f7302481105176b594cda99a8)
+        ;
+
+        
+    
+    
+            var poly_line_9597ccd84b463b778db8a3290c50bff6 = L.polyline(
+                [[40.711661, -73.987725], [40.711476, -74.013379]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_652277a8800ba84e8c8f84d434a84b45 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3b8803752111a68e66bf7462d9f6cb07 = $(`<div id="html_3b8803752111a68e66bf7462d9f6cb07" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.711661,-73.987725/40.711476,-74.013379" target="_blank">Route: Golden Diner → 9/11 Museum</a></div>`)[0];
+            popup_652277a8800ba84e8c8f84d434a84b45.setContent(html_3b8803752111a68e66bf7462d9f6cb07);
+        
+
+        poly_line_9597ccd84b463b778db8a3290c50bff6.bindPopup(popup_652277a8800ba84e8c8f84d434a84b45)
+        ;
+
+        
+    
+    
+            var poly_line_588194f2fe8a9056e08a12f4a921a65b = L.polyline(
+                [[40.711476, -74.013379], [40.707227, -74.003739]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_233b77d24cbad0c3d8d30dd87e435bc6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9695d4f2cca96083f58f511d411d72af = $(`<div id="html_9695d4f2cca96083f58f511d411d72af" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.711476,-74.013379/40.707227,-74.003739" target="_blank">Route: 9/11 Museum → The Seaport</a></div>`)[0];
+            popup_233b77d24cbad0c3d8d30dd87e435bc6.setContent(html_9695d4f2cca96083f58f511d411d72af);
+        
+
+        poly_line_588194f2fe8a9056e08a12f4a921a65b.bindPopup(popup_233b77d24cbad0c3d8d30dd87e435bc6)
+        ;
+
+        
+    
+    
+            var poly_line_d0d9e3b7a676ffb2893f59ab788931cb = L.polyline(
+                [[40.707227, -74.003739], [40.785062, -73.976819]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_57546ce8179ca10da7f955e0a8256d2b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_250a2e132948731a0766ee5039c89c53 = $(`<div id="html_250a2e132948731a0766ee5039c89c53" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.707227,-74.003739/40.785062,-73.976819" target="_blank">Route: The Seaport → Jacob’s Pickles</a></div>`)[0];
+            popup_57546ce8179ca10da7f955e0a8256d2b.setContent(html_250a2e132948731a0766ee5039c89c53);
+        
+
+        poly_line_d0d9e3b7a676ffb2893f59ab788931cb.bindPopup(popup_57546ce8179ca10da7f955e0a8256d2b)
+        ;
+
+        
+    
+    
+            var poly_line_429a5f2e374d94b93c25e0da17a4379c = L.polyline(
+                [[40.785062, -73.976819], [40.726227, -74.000893]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_14489d3b5dadac149a8626f4987b4d36 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_787c718518daa901a459fac56f363b59 = $(`<div id="html_787c718518daa901a459fac56f363b59" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.785062,-73.976819/40.726227,-74.000893" target="_blank">Route: Jacob’s Pickles → Aritzia</a></div>`)[0];
+            popup_14489d3b5dadac149a8626f4987b4d36.setContent(html_787c718518daa901a459fac56f363b59);
+        
+
+        poly_line_429a5f2e374d94b93c25e0da17a4379c.bindPopup(popup_14489d3b5dadac149a8626f4987b4d36)
+        ;
+
+        
+    
+    
+            var poly_line_dd8f078d931323ceec7892a41de7c630 = L.polyline(
+                [[40.726227, -74.000893], [40.741358, -73.992072]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_53f670c3a4edc9dbfef0ac88bf0669f7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e8355c16e0d60c19bc25df41ffd4bcd2 = $(`<div id="html_e8355c16e0d60c19bc25df41ffd4bcd2" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.726227,-74.000893/40.741358,-73.992072" target="_blank">Route: Aritzia → Sephora</a></div>`)[0];
+            popup_53f670c3a4edc9dbfef0ac88bf0669f7.setContent(html_e8355c16e0d60c19bc25df41ffd4bcd2);
+        
+
+        poly_line_dd8f078d931323ceec7892a41de7c630.bindPopup(popup_53f670c3a4edc9dbfef0ac88bf0669f7)
+        ;
+
+        
+    
+    
+            var poly_line_8961a95e6ed347dcd7fb72b9356c154d = L.polyline(
+                [[40.741358, -73.992072], [40.754625, -73.986362]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_a20239491ae5507e3033f74cd03de249 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1f8ee7f0443b880e2f81153b442b7699 = $(`<div id="html_1f8ee7f0443b880e2f81153b442b7699" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.741358,-73.992072/40.754625,-73.986362" target="_blank">Route: Sephora → Victoria’s Secret</a></div>`)[0];
+            popup_a20239491ae5507e3033f74cd03de249.setContent(html_1f8ee7f0443b880e2f81153b442b7699);
+        
+
+        poly_line_8961a95e6ed347dcd7fb72b9356c154d.bindPopup(popup_a20239491ae5507e3033f74cd03de249)
+        ;
+
+        
+    
+    
+            var poly_line_3f48a0d5144e43aaf418adb8a5817fbf = L.polyline(
+                [[40.754625, -73.986362], [40.725719, -74.005298]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_deb00abe23ff7ab13aebf008c1b22d0e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_56ba4e406372d71e663eff8d956eeef0 = $(`<div id="html_56ba4e406372d71e663eff8d956eeef0" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.754625,-73.986362/40.725719,-74.005298" target="_blank">Route: Victoria’s Secret → Au Cheval</a></div>`)[0];
+            popup_deb00abe23ff7ab13aebf008c1b22d0e.setContent(html_56ba4e406372d71e663eff8d956eeef0);
+        
+
+        poly_line_3f48a0d5144e43aaf418adb8a5817fbf.bindPopup(popup_deb00abe23ff7ab13aebf008c1b22d0e)
+        ;
+
+        
+    
+    
+            var poly_line_ba5d22002930482dae5fb79d527e13fd = L.polyline(
+                [[40.748008, -74.004647], [40.742799, -74.008956]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_3a590f28b783435ced0e57b6fb658d35 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e2e7c2193b0129b0c715afd5ba704807 = $(`<div id="html_e2e7c2193b0129b0c715afd5ba704807" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.748008,-74.004647/40.742799,-74.008956" target="_blank">Route: High Line → Little Island</a></div>`)[0];
+            popup_3a590f28b783435ced0e57b6fb658d35.setContent(html_e2e7c2193b0129b0c715afd5ba704807);
+        
+
+        poly_line_ba5d22002930482dae5fb79d527e13fd.bindPopup(popup_3a590f28b783435ced0e57b6fb658d35)
+        ;
+
+        
+    
+    
+            var poly_line_17080069ab2d2b810483aee5f66d20b7 = L.polyline(
+                [[40.742799, -74.008956], [40.724932, -73.999768]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_db5a6d564f942ad7243ad68d88b1d96e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_692c7a1742ef9b9542c14e71bb19fc80 = $(`<div id="html_692c7a1742ef9b9542c14e71bb19fc80" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.742799,-74.008956/40.724932,-73.999768" target="_blank">Route: Little Island → 2nd STREET</a></div>`)[0];
+            popup_db5a6d564f942ad7243ad68d88b1d96e.setContent(html_692c7a1742ef9b9542c14e71bb19fc80);
+        
+
+        poly_line_17080069ab2d2b810483aee5f66d20b7.bindPopup(popup_db5a6d564f942ad7243ad68d88b1d96e)
+        ;
+
+        
+    
+    
+            var poly_line_3533c93fb887605e254806be780951d7 = L.polyline(
+                [[40.724932, -73.999768], [40.758911, -73.994232]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_f017aa133a826e152b00d38bb14267cf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6a795872703569ab137805a66bab7824 = $(`<div id="html_6a795872703569ab137805a66bab7824" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.724932,-73.999768/40.758911,-73.994232" target="_blank">Route: 2nd STREET → Target</a></div>`)[0];
+            popup_f017aa133a826e152b00d38bb14267cf.setContent(html_6a795872703569ab137805a66bab7824);
+        
+
+        poly_line_3533c93fb887605e254806be780951d7.bindPopup(popup_f017aa133a826e152b00d38bb14267cf)
+        ;
+
+        
+    
+    
+            var poly_line_e755614969e7a75e0a0b6bcf0d27dcf3 = L.polyline(
+                [[40.758911, -73.994232], [40.773101, -73.958479]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_281ad8ef603e56f5494e485abbd207f1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4c5201a5665b4b6eb29f53381b7a5e09 = $(`<div id="html_4c5201a5665b4b6eb29f53381b7a5e09" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.758911,-73.994232/40.773101,-73.958479" target="_blank">Route: Target → Lexington Candy Shop</a></div>`)[0];
+            popup_281ad8ef603e56f5494e485abbd207f1.setContent(html_4c5201a5665b4b6eb29f53381b7a5e09);
+        
+
+        poly_line_e755614969e7a75e0a0b6bcf0d27dcf3.bindPopup(popup_281ad8ef603e56f5494e485abbd207f1)
+        ;
+
+        
+    
+    
+            var poly_line_eb3fab2aba0dbf227a2b7349670ac7a6 = L.polyline(
+                [[40.773101, -73.958479], [40.721724, -73.997401]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_4f2c500d013ebbc30e2e4d6df1c87982 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dc944fef7319379ed355af83f564d15a = $(`<div id="html_dc944fef7319379ed355af83f564d15a" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.773101,-73.958479/40.721724,-73.997401" target="_blank">Route: Lexington Candy Shop → Parm</a></div>`)[0];
+            popup_4f2c500d013ebbc30e2e4d6df1c87982.setContent(html_dc944fef7319379ed355af83f564d15a);
+        
+
+        poly_line_eb3fab2aba0dbf227a2b7349670ac7a6.bindPopup(popup_4f2c500d013ebbc30e2e4d6df1c87982)
+        ;
+
+        
+    
+    
+            var poly_line_04fbec4ddde978409d37686728c100e8 = L.polyline(
+                [[40.725314, -74.004198], [40.774178, -73.970093]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_40e71470c71c55f5cf1fe23fbf15b7bf = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9a5f0b064751d542cdef9bc442407ea1 = $(`<div id="html_9a5f0b064751d542cdef9bc442407ea1" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.725314,-74.004198/40.774178,-73.970093" target="_blank">Route: Sadelle’s → Bethesda Terrace</a></div>`)[0];
+            popup_40e71470c71c55f5cf1fe23fbf15b7bf.setContent(html_9a5f0b064751d542cdef9bc442407ea1);
+        
+
+        poly_line_04fbec4ddde978409d37686728c100e8.bindPopup(popup_40e71470c71c55f5cf1fe23fbf15b7bf)
+        ;
+
+        
+    
+    
+            var poly_line_a25895c4137085e640e625fbfee3b0eb = L.polyline(
+                [[40.774178, -73.970093], [40.764511, -73.974185]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_55f990c72717a041f587a87723c3ac12 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8e34a4dacf1e1429faccef4ac552e4b4 = $(`<div id="html_8e34a4dacf1e1429faccef4ac552e4b4" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.774178,-73.970093/40.764511,-73.974185" target="_blank">Route: Bethesda Terrace → The Plaza Hotel</a></div>`)[0];
+            popup_55f990c72717a041f587a87723c3ac12.setContent(html_8e34a4dacf1e1429faccef4ac552e4b4);
+        
+
+        poly_line_a25895c4137085e640e625fbfee3b0eb.bindPopup(popup_55f990c72717a041f587a87723c3ac12)
+        ;
+
+        
+    
+    
+            var poly_line_7833f3178d6b2d0835c5d7231007945e = L.polyline(
+                [[40.764511, -73.974185], [40.707169, -73.963663]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_ed6b6ee148a0e4c020e5335f1f78551c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1eed34e96eda624dd7e7f4b3d290bf86 = $(`<div id="html_1eed34e96eda624dd7e7f4b3d290bf86" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.764511,-73.974185/40.707169,-73.963663" target="_blank">Route: The Plaza Hotel → L’industrie Pizzeria</a></div>`)[0];
+            popup_ed6b6ee148a0e4c020e5335f1f78551c.setContent(html_1eed34e96eda624dd7e7f4b3d290bf86);
+        
+
+        poly_line_7833f3178d6b2d0835c5d7231007945e.bindPopup(popup_ed6b6ee148a0e4c020e5335f1f78551c)
+        ;
+
+        
+    
+    
+            var poly_line_6efea271c3bb59815f4254afaf87d323 = L.polyline(
+                [[40.707169, -73.963663], [40.779668, -73.980019]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_4be7935057f14bdebb28478a8095c96a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_440d5409d3188be893eba14e977414f4 = $(`<div id="html_440d5409d3188be893eba14e977414f4" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.707169,-73.963663/40.779668,-73.980019" target="_blank">Route: L’industrie Pizzeria → Levain Bakery</a></div>`)[0];
+            popup_4be7935057f14bdebb28478a8095c96a.setContent(html_440d5409d3188be893eba14e977414f4);
+        
+
+        poly_line_6efea271c3bb59815f4254afaf87d323.bindPopup(popup_4be7935057f14bdebb28478a8095c96a)
+        ;
+
+        
+    
+    
+            var poly_line_07938736e3d3c449ed2642a69f12e1fd = L.polyline(
+                [[40.779668, -73.980019], [40.734346, -74.008759]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_862ff672c0e2fc5de4527fa83d90f1fb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c87de5eb265513990f8e2273ae8a8239 = $(`<div id="html_c87de5eb265513990f8e2273ae8a8239" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.779668,-73.980019/40.734346,-74.008759" target="_blank">Route: Levain Bakery → Jeju Noodle Bar</a></div>`)[0];
+            popup_862ff672c0e2fc5de4527fa83d90f1fb.setContent(html_c87de5eb265513990f8e2273ae8a8239);
+        
+
+        poly_line_07938736e3d3c449ed2642a69f12e1fd.bindPopup(popup_862ff672c0e2fc5de4527fa83d90f1fb)
+        ;
+
+        
+    
+    
+            var poly_line_4db40d2ec031da47556edbb871ad8822 = L.polyline(
+                [[40.729107, -73.989045], [40.732893, -73.98264]],
+                {"bubblingMouseEvents": true, "color": "pink", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "pink", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_77f37d6e7fbe6e00a4119cdfaaec60ff);
+        
+    
+        var popup_40154fe8e95f9e89de71925f7d74e43e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5bf63df0e6727c996466dae15535ec93 = $(`<div id="html_5bf63df0e6727c996466dae15535ec93" style="width: 100.0%; height: 100.0%;"><a href="https://www.google.com/maps/dir/40.729107,-73.989045/40.732893,-73.98264" target="_blank">Route: Leon’s Bagels → Apollo Bagels</a></div>`)[0];
+            popup_40154fe8e95f9e89de71925f7d74e43e.setContent(html_5bf63df0e6727c996466dae15535ec93);
+        
+
+        poly_line_4db40d2ec031da47556edbb871ad8822.bindPopup(popup_40154fe8e95f9e89de71925f7d74e43e)
+        ;
+
+        
+    
+</script>
+</html>
